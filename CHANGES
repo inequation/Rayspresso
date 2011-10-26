@@ -1,0 +1,8 @@
+commit c30c149925deee59f807fddffd4bb19cee3bd158
+Author: Leszek Godlewski <lg@inequation.org>
+Date:   Wed Oct 26 19:07:56 2011 +0200
+
+    * set up the NetBeans project
+    * added a 3-dimensional vector class
+    * added the ray class
+    * added the traceable interface
