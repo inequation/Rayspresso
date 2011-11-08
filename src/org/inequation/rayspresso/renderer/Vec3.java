@@ -1,9 +1,11 @@
-package org.inequation.rayspresso;
+package org.inequation.rayspresso.renderer;
+
+import java.util.Arrays;
 
 /**
  * Three-dimensional floating point vector.
  * @author inequation
- * @version 29.10.2011
+ * @version 08.11.2011
  */
 public class Vec3 implements Cloneable {
     /** Zero-argument constructor. */
@@ -55,6 +57,12 @@ public class Vec3 implements Cloneable {
     public void setY(float Y) {m_v[1] = Y;}
     /** Sets the Z component. */
     public void setZ(float Z) {m_v[2] = Z;}
+    /** Sets all the vector components. */
+    public void set(float X, float Y, float Z) {
+        m_v[0] = X;
+        m_v[1] = X;
+        m_v[2] = X;
+    } 
     
     /** Computes the length squared of the vector. */
     public float lengthSquared() {return this.dot(this);}
@@ -163,13 +171,40 @@ public class Vec3 implements Cloneable {
     }
     
     /** Normalizes this. */
-    public void normalize() {
-        this.divAssign(this.length());
+    public void normalize() throws ZeroVectorNormalizationException {
+        float l = this.length();
+        if (l <= 0.f)
+            throw new ZeroVectorNormalizationException();
+        this.divAssign(l);
     }
     
     /** @return a normalized version of this */
-    public Vec3 normalized() {
-        return this.div(this.length());
+    public Vec3 normalized() throws ZeroVectorNormalizationException {
+        float l = this.length();
+        if (l <= 0.f)
+            throw new ZeroVectorNormalizationException();
+        return this.div(l);
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (o.getClass() == this.getClass()) {
+            Vec3 diff = this.sub((Vec3)o);
+            return diff.lengthSquared() < 0.0001;
+        } else
+            return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + Arrays.hashCode(this.m_v);
+        return hash;
+    }
+    
+    @Override
+    public String toString() {
+        return m_v[0] + " " + m_v[1] + " " + m_v[2];
     }
     
     /** Actual component array. */

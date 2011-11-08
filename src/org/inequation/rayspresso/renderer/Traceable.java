@@ -1,9 +1,9 @@
-package org.inequation.rayspresso;
+package org.inequation.rayspresso.renderer;
 
 /**
  * Interface for all ray-traceable objects in the scene (e.g. shapes).
  * @author inequation
- * @version 29.10.2011
+ * @version 08.11.2011
  */
 public interface Traceable {
     /**
@@ -15,4 +15,7 @@ public interface Traceable {
      * @return true if there was intersection, false otherwise
      */
     boolean intersect(Ray in_r, float out_distance, Vec3 out_point, Vec3 out_normal);
+    
+    /** Retrieves the treaceable's surface shader. */
+    Shader getShader();
 }

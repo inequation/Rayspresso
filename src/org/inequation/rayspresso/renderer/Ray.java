@@ -1,4 +1,7 @@
-package org.inequation.rayspresso;
+package org.inequation.rayspresso.renderer;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class representing a single ray being cast into the scene.
@@ -7,7 +10,7 @@ package org.inequation.rayspresso;
  */
 public class Ray {
     /** Constructs a ray spanning from start to end. */
-    public Ray(Vec3 start, Vec3 end) {
+    public Ray(Vec3 start, Vec3 end) throws ZeroVectorNormalizationException {
         this(start, end, false);
     }
     
@@ -15,30 +18,30 @@ public class Ray {
      * Constructs a ray spanning from start to end.
      * @param   initialOffset   if true, the starting point will be offset by a small epsilon in the direction of the endpoint (used to avoid immediate collisions on exit ray calculations)
      */
-    public Ray(Vec3 start, Vec3 end, boolean initialOffset) {
+    public Ray(Vec3 start, Vec3 end, boolean initialOffset)
+        throws ZeroVectorNormalizationException {
         m_start = start.clone();
         m_end = end.clone();
-        m_dir = end.sub(start);
-	m_dir.normalize();
+        m_dir = end.sub(start).normalized();
 	if (initialOffset)
-		m_start.addAssign(m_dir.mult(m_offsetEpsilon));
+            m_start.addAssign(m_dir.mult(m_offsetEpsilon));
 	m_projStart = m_dir.dot(m_start);
 	m_projEnd = m_dir.dot(m_end);
 	m_length = m_projEnd - m_projStart;
     }
     
     /** Retrieves the starting point of the ray. */
-    Vec3 getStart() {return m_start;}
+    public Vec3 getStart() {return m_start;}
     /** Retrieves the end point of the ray. */
-    Vec3 getEnd() {return m_end;}
+    public Vec3 getEnd() {return m_end;}
     /** Retrieves a unit vector, representing the direction of the ray. */
-    Vec3 getDir() {return m_dir;}
+    public Vec3 getDir() {return m_dir;}
     /** Retrieves the starting point of the ray, projected onto the ray axis. */
-    float getProjectedStart() {return m_projStart;}
+    public float getProjectedStart() {return m_projStart;}
     /** Retrieves the end point of the ray, projected onto the ray axis. */
-    float getProjectedEnd() {return m_projEnd;}
+    public float getProjectedEnd() {return m_projEnd;}
     /** Retrieves the ray length. */
-    float getLength() {return m_length;}
+    public float getLength() {return m_length;}
     
     /** Properties of the ray. */
     private Vec3 m_start, m_end, m_dir;

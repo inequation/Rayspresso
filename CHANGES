@@ -1,4 +1,14 @@
-commit c30c149925deee59f807fddffd4bb19cee3bd158
+commit 7876b88fa01e90b3c0cde43c19293995584ba18d
+Author: Leszek Godlewski <lg@inequation.org>
+Date:   Wed Nov 9 00:50:54 2011 +0100
+
+    * slightly reorganized the package structure of the project
+    * added commandline argument handling in the main class
+    * added a linear colour class
+    * added stub classes for scene and shader
+    * implemented unit tests for the functional classes
+
+commit cd0c11fdcc11ba31d3b3b0f32ffb1aafcb408c86
 Author: Leszek Godlewski <lg@inequation.org>
 Date:   Wed Oct 26 19:07:56 2011 +0200
 
