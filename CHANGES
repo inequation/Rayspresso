@@ -1,4 +1,14 @@
-commit 7876b88fa01e90b3c0cde43c19293995584ba18d
+commit 7afb8bc34c2d35db0933dd29df297aa3150b9247
+Author: Leszek Godlewski <lg@inequation.org>
+Date:   Sun Nov 27 13:29:54 2011 +0100
+
+    * added all the missing renderer infrastructure (camera, intersection, planes, point lights, materials etc.)
+    * added a Blinn-Phong shader material
+    * added a GUI in Swing
+    * dropped clone() overrides in favour of copy constructors
+    * fixed several bugs in the raycasting algorithm
+
+commit 7c8b3b52c5a86a64c0dc246ffdc40955c4c99a54
 Author: Leszek Godlewski <lg@inequation.org>
 Date:   Wed Nov 9 00:50:54 2011 +0100
 

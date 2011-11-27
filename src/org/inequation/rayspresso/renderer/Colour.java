@@ -8,6 +8,21 @@ import java.util.Arrays;
  * @version 08.11.2011
  */
 public class Colour {
+    /**
+     * Initializes components with the given parameters.
+     * @param R the R component
+     * @param G the G component
+     * @param B the B component
+     * @param A the A component
+     */
+    public Colour(float R, float G, float B, float A) {
+        m_v = new float[4];
+        m_v[0] = R;
+        m_v[1] = G;
+        m_v[2] = B;
+        m_v[3] = A;
+    }
+    
     /** Zero-argument constructor. */
     public Colour() {
         m_v = new float[4];
@@ -22,29 +37,18 @@ public class Colour {
         m_v[0] = m_v[1] = m_v[2] = m_v[3] = all;
     }
     
-    /** Creates a verbatim value copy of this vector. */
-    @Override
-    public Colour clone() {
-        try {
-            return (Colour)super.clone();
-        } catch (CloneNotSupportedException e) {
-            return new Colour();
-        }
+    /** Standard 3-component constructor (alpha is assumed to be 1). */
+    public Colour(float R, float G, float B) {
+        this(R, G, B, 1.f);
     }
     
-    /**
-     * Initializes components with the given parameters.
-     * @param R the R component
-     * @param G the G component
-     * @param B the B component
-     * @param A the A component
-     */
-    public Colour(float R, float G, float B, float A) {
+    /** Copy constructor. */
+    public Colour(Colour other) {
         m_v = new float[4];
-        m_v[0] = R;
-        m_v[1] = G;
-        m_v[2] = B;
-        m_v[3] = A;
+        m_v[0] = other.m_v[0];
+        m_v[1] = other.m_v[1];
+        m_v[2] = other.m_v[2];
+        m_v[3] = other.m_v[3];
     }
     
     /** Retrieves the R component. */
@@ -62,7 +66,7 @@ public class Colour {
     /** Sets the B component. */
     public void setB(float B) {m_v[2] = B;}
     /** Sets the A component. */
-    public void setA(float A) {m_v[2] = A;}
+    public void setA(float A) {m_v[3] = A;}
     /** Sets all the vector components. */
     public void set(float R, float G, float B, float A) {
         m_v[0] = R;
@@ -175,6 +179,14 @@ public class Colour {
         m_v[1] = Math.min(Math.max(m_v[1], 0.f), 1.f);
         m_v[2] = Math.min(Math.max(m_v[2], 0.f), 1.f);
         m_v[3] = Math.min(Math.max(m_v[3], 0.f), 1.f);
+    }
+    
+    /** Retrieves a TYPE_INT_ABGR pixel for use with awt/swing. */
+    public int getInt() {
+        return (int)(m_v[2] * 255.f)
+            | ((int)(m_v[1] * 255.f) << 8)
+            | ((int)(m_v[0] * 255.f) << 16)
+            | ((int)(m_v[3] * 255.f) << 24);
     }
     
     @Override

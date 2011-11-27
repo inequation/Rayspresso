@@ -32,7 +32,7 @@ public class ColourTest {
     @Test
     public void testClone() {
         Colour instance = new Colour(1, 2, 3, 4);
-        Colour clone = instance.clone();
+        Colour clone = new Colour(instance);
         assertNotSame(instance, clone);
     }
 

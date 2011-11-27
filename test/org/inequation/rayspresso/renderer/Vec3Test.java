@@ -28,7 +28,7 @@ public class Vec3Test {
     @Test
     public void testClone() {
         Vec3 instance = new Vec3(1, 2, 3);
-        Vec3 clone = instance.clone();
+        Vec3 clone = new Vec3(instance);
         assertNotSame(instance, clone);
     }
 

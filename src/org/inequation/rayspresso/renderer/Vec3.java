@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * Three-dimensional floating point vector.
  * @author inequation
- * @version 08.11.2011
+ * @version 09.11.2011
  */
 public class Vec3 implements Cloneable {
     /** Zero-argument constructor. */
@@ -22,14 +22,12 @@ public class Vec3 implements Cloneable {
         m_v[0] = m_v[1] = m_v[2] = all;
     }
     
-    /** Creates a verbatim value copy of this vector. */
-    @Override
-    public Vec3 clone() {
-        try {
-            return (Vec3)super.clone();
-        } catch (CloneNotSupportedException e) {
-            return new Vec3();
-        }
+    /** Copy constructor. */
+    public Vec3(Vec3 other) {
+        m_v = new float[3];
+        m_v[0] = other.m_v[0];
+        m_v[1] = other.m_v[1];
+        m_v[2] = other.m_v[2];
     }
     
     /**
@@ -77,10 +75,11 @@ public class Vec3 implements Cloneable {
     }
     
     /** Adds other to this. */
-    public void addAssign(Vec3 other) {
+    public Vec3 addAssign(Vec3 other) {
         this.m_v[0] += other.m_v[0];
         this.m_v[1] += other.m_v[1];
         this.m_v[2] += other.m_v[2];
+        return this;
     }
     
     /** @return a new vector created by subtracting other from this. */
@@ -91,10 +90,11 @@ public class Vec3 implements Cloneable {
     }
     
     /** Subtracts other from this. */
-    public void subAssign(Vec3 other) {
+    public Vec3 subAssign(Vec3 other) {
         this.m_v[0] -= other.m_v[0];
         this.m_v[1] -= other.m_v[1];
         this.m_v[2] -= other.m_v[2];
+        return this;
     }
     
     /** @return a new vector created by multiplying other by this, component-wise. */
@@ -105,10 +105,11 @@ public class Vec3 implements Cloneable {
     }
     
     /** Multiplies other by this, component-wise. */
-    public void multAssign(Vec3 other) {
+    public Vec3 multAssign(Vec3 other) {
         this.m_v[0] *= other.m_v[0];
         this.m_v[1] *= other.m_v[1];
         this.m_v[2] *= other.m_v[2];
+        return this;
     }
     
     /** @return a new vector created by dividing this by other, component-wise. */
@@ -119,10 +120,11 @@ public class Vec3 implements Cloneable {
     }
     
     /** Divides this by other, component-wise. */
-    public void divAssign(Vec3 other) {
+    public Vec3 divAssign(Vec3 other) {
         this.m_v[0] /= other.m_v[0];
         this.m_v[1] /= other.m_v[1];
         this.m_v[2] /= other.m_v[2];
+        return this;
     }
     
     /** @return a new vector created by multiplying all components of this by other. */
@@ -133,10 +135,11 @@ public class Vec3 implements Cloneable {
     }
     
     /** Multiplies other by this. */
-    public void multAssign(float other) {
+    public Vec3 multAssign(float other) {
         this.m_v[0] *= other;
         this.m_v[1] *= other;
         this.m_v[2] *= other;
+        return this;
     }
     
     /** @return a new vector created by dividing all components of this by other. */
@@ -148,11 +151,12 @@ public class Vec3 implements Cloneable {
     }
     
     /** Divides other by this. */
-    public void divAssign(float other) {
+    public Vec3 divAssign(float other) {
         other = 1.f / other;
         this.m_v[0] *= other;
         this.m_v[1] *= other;
         this.m_v[2] *= other;
+        return this;
     }
     
     /**
@@ -171,11 +175,11 @@ public class Vec3 implements Cloneable {
     }
     
     /** Normalizes this. */
-    public void normalize() throws ZeroVectorNormalizationException {
+    public Vec3 normalize() throws ZeroVectorNormalizationException {
         float l = this.length();
         if (l <= 0.f)
             throw new ZeroVectorNormalizationException();
-        this.divAssign(l);
+        return this.divAssign(l);
     }
     
     /** @return a normalized version of this */

@@ -1,12 +1,9 @@
 package org.inequation.rayspresso.renderer;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * Class representing a single ray being cast into the scene.
  * @author inequation
- * @version 29.10.2011
+ * @version 22.11.2011
  */
 public class Ray {
     /** Constructs a ray spanning from start to end. */
@@ -20,8 +17,8 @@ public class Ray {
      */
     public Ray(Vec3 start, Vec3 end, boolean initialOffset)
         throws ZeroVectorNormalizationException {
-        m_start = start.clone();
-        m_end = end.clone();
+        m_start = new Vec3(start);
+        m_end = new Vec3(end);
         m_dir = end.sub(start).normalized();
 	if (initialOffset)
             m_start.addAssign(m_dir.mult(m_offsetEpsilon));
