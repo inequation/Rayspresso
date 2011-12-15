@@ -1,4 +1,17 @@
-commit 7afb8bc34c2d35db0933dd29df297aa3150b9247
+commit dc05b9e5899536f1792a8122365263870e73d923
+Author: Leszek Godlewski <lg@inequation.org>
+Date:   Thu Dec 15 15:18:01 2011 +0100
+
+    * further workspace refactoring
+    * added a web app that provides a simple JSP front-end to a servlet-invoked renderer
+
+commit 3cd3aaa077855e37c466e479901af720b8d9a175
+Author: Leszek Godlewski <lg@inequation.org>
+Date:   Thu Dec 15 10:10:10 2011 +0100
+
+    project reorganization - split the renderer into a separate library project
+
+commit 0fbd80cafbedd5f8db64a80d41c8dd60d497cc2a
 Author: Leszek Godlewski <lg@inequation.org>
 Date:   Sun Nov 27 13:29:54 2011 +0100
 
