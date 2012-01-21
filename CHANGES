@@ -1,4 +1,10 @@
-commit dc05b9e5899536f1792a8122365263870e73d923
+commit a552e0fb8370319909134354d09b3ee9a9a9a5c0
+Author: Leszek Godlewski <lg@inequation.org>
+Date:   Sat Jan 21 19:20:40 2012 +0100
+
+    added JDBC-backed render history to the web app
+
+commit f71e8cecf904a6444e7408450be0a1311fb9c43a
 Author: Leszek Godlewski <lg@inequation.org>
 Date:   Thu Dec 15 15:18:01 2011 +0100
 

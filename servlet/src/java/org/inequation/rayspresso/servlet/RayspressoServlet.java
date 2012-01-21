@@ -5,25 +5,46 @@
 package org.inequation.rayspresso.servlet;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.*;
+import java.util.Calendar;
 import javax.imageio.ImageIO;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.inequation.rayspresso.renderer.*;
+import org.inequation.rayspresso.servlet.RenderHistoryController;
 
 /**
  * Main servlet for the web interface to Rayspresso.
  * @author inequation
  */
 public class RayspressoServlet extends HttpServlet {
+    private static ServletContext m_context;
+        
+    /** Servlet initialization routine. */
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        m_context = config.getServletContext();        
+    }
+    
+    /** Servlet destruction routine. */
+    @Override
+    public void destroy() {
+        RenderHistoryController.getInstance().destroy();
+        super.destroy();
+    }
+    
+    public static ServletContext getContext() {
+        return m_context;
+    }
+    
     /** Populates the scene with traceables and lights. */
     private void populateScene() {
         Scene.getInstance().getTraceables().clear();
@@ -121,6 +142,12 @@ public class RayspressoServlet extends HttpServlet {
             }
             return;
         }
+        
+        // make an entry in the render history database
+        RenderHistoryController.getInstance().insertEntry(
+            new RenderHistoryEntry(
+                new Timestamp(Calendar.getInstance().getTime().getTime()),
+                rt, zNear, zFar, w, h));
         
         response.setContentType("image/png");
         OutputStream out = response.getOutputStream();

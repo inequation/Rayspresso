@@ -14,6 +14,7 @@
     </head>
     <body>
         <h1>Render options</h1>
+        <a href="history.jsp">View history</a><br />
         <form method="post" action="render" target="preview">
             <table>
                 <tr>
